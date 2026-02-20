@@ -32,6 +32,7 @@ roclet_process.roclet_super_rd <- function(x, blocks, env, base_path) {
 #' @param block The block, a sort of list of tags
 #' @param env No idea
 #' @param base_path Path on which roxygenize is run
+#' @dev
 mark_dev_block <- function(block, env, base_path) {
   has_dev <- "dev" %in% purrr::map_chr(block$tags, "tag")
 

@@ -6,3 +6,4 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^man/mark_dev_block.Rd
