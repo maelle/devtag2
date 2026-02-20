@@ -51,3 +51,5 @@ Piggy-backing on the Rd roclet makes the experience nicer.
 I was also hoping the code would be simpler but I'm not so sure it is:
 - The Rbuildignoring needs to happen in the output method where we have access to the filename of the Rd file. But at that stage we no longer have access to tags, only to the contents of the Rd file.
 - Therefore in the process method I "mark" the block as a dev block by changing its title, adding "Internal function:" before the title. Then in the output method I remove the mark. This feels a bit hacky still!
+
+A drawback to this being a roclet to use instead of the Rd roclet means you can't use it in combination with a roclet that also extends the Rd roclet.
