@@ -52,3 +52,7 @@ have access to tags, only to the contents of the Rd file. - Therefore in
 the process method I “mark” the block as a dev block by changing its
 title, adding “Internal function:” before the title. Then in the output
 method I remove the mark. This feels a bit hacky still!
+
+A drawback to this being a roclet to use instead of the Rd roclet means
+you can’t use it in combination with a roclet that also extends the Rd
+roclet.
