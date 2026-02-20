@@ -13,19 +13,32 @@ super_rd <- function() {
 
 #' @importFrom roxygen2 roclet_process
 #' @export
-
 roclet_process.roclet_super_rd <- function(x, blocks, env, base_path) {
-  blocks <- lapply(blocks, handle_dev, env, base_path)
+  blocks <- lapply(blocks, mark_dev_block, env, base_path)
   NextMethod()
 }
 
-# This function "marks" blocks with a dev tag
-# by changing their title
-handle_dev <- function(block, env, base_path) {
+#' Mark dev blocks as dev blocks
+#'
+#' This function "marks" blocks with a dev tag
+#' by adding "An internal function: " at the beginning
+#' of their title.
+#' This is needed because there is no other way
+#' to let the output method of the roclet
+#' know which topics "are" dev, because
+#' the output method of the Rd roclet no longer has
+#' access to the tags.
+#'
+#' @param block The block, a sort of list of tags
+#' @param env No idea
+#' @param base_path Path on which roxygenize is run
+mark_dev_block <- function(block, env, base_path) {
   has_dev <- "dev" %in% purrr::map_chr(block$tags, "tag")
+
   if (!has_dev) {
     return(block)
   }
+
   block$tags <- purrr::map(block$tags, \(x) {
     if (x$tag == "title") {
       x$val <- paste("Internal function:", x$val)
@@ -38,18 +51,21 @@ handle_dev <- function(block, env, base_path) {
 
 #' @importFrom roxygen2 roclet_output
 #' @export
-
 roclet_output.roclet_super_rd <- function(x, results, base_path, ...) {
   results <- lapply_with_names(results, rbuild_ignore, base_path)
   NextMethod()
 }
 
-#' My helper function
+#' Rbuild ignores dev topics
+#'
+#' This adds topic whose title starts with "An internal function: "
+#' to `.Rbuildignore`,
+#' then removes the suffix from the title.
 #'
 #' @param topic A roxygen2 topic
-#' @param base_path Path on which roxygenize is run
+#' @inheritParams mark_dev_block
 #'
-#' @returns No idea, the Rd roclet uses it
+#' @returns No idea, the Rd roclet uses it happily.
 #'
 #' @dev
 rbuild_ignore <- function(topic, base_path) {

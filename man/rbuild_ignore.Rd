@@ -2,7 +2,7 @@
 % Please edit documentation in R/roxygen2.R
 \name{rbuild_ignore}
 \alias{rbuild_ignore}
-\title{My helper function}
+\title{Rbuild ignores dev topics}
 \usage{
 rbuild_ignore(topic, base_path)
 }
@@ -12,8 +12,10 @@ rbuild_ignore(topic, base_path)
 \item{base_path}{Path on which roxygenize is run}
 }
 \value{
-No idea, the Rd roclet uses it
+No idea, the Rd roclet uses it happily.
 }
 \description{
-Internal function: My helper function
+This adds topic whose title starts with "An internal function: "
+to \code{.Rbuildignore},
+then removes the suffix from the title.
 }
