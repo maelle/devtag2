@@ -1,0 +1,15 @@
+Package: devtag2
+Title: Restrict Help Files to Development 
+Version: 0.0.0.9000
+Authors@R: 
+    person("Maëlle", "Salmon", , "msmaellesalmon@gmail.com", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0002-2815-0399"))
+Description: Extends the Rd roclet to support creating internal manual pages.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE, roclets = c("collate", "devtag2::super_rd", "namespace"))
+RoxygenNote: 7.3.3.9000
+Imports: 
+    cli,
+    purrr,
+    roxygen2

@@ -1,0 +1,7 @@
+^devtag2\.Rproj$
+^\.Rproj\.user$
+^man/rbuild_ignore.Rd
+^LICENSE\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
